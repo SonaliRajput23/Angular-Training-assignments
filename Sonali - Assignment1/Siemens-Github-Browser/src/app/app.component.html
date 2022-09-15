@@ -1,0 +1,18 @@
+<div class="d-flex flex-column min-vh-100">
+    <app-header (searchSubmitted)="eventReceivedFromSearch($event)"></app-header>
+    <app-profile [profile]="angularsProfile" (profileNameClicked)="eventReceivedFromChild($event)"></app-profile>
+
+    <br>
+
+    <div class="center">
+         <h1>Profile List</h1>
+    </div>
+    <ul>
+        <li *ngFor="let prof of profiles">
+            <app-profile [profile]="prof" (profileNameClicked)="eventReceivedFromChild($event)"></app-profile>
+        </li>
+
+    </ul>
+    
+    <app-footer class="mt-auto"></app-footer>
+</div>

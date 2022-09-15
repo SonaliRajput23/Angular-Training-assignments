@@ -1,0 +1,53 @@
+<div class="container p-3 rounded shadow" id="{{ profile.id }}">
+    <div class="row mt-3">
+        <div class="col-2">
+            <!-- <img [src]="profile.avatar_url" class="img-thumbnail rounded" title="{{ profile.login }}" *ngIf="isVisible">
+            <h1 *ngIf="!isVisible">Image Hidden</h1> -->
+
+            <img [src]="profile.avatar_url" class="img-thumbnail rounded" title="{{ profile.login }}" 
+            *ngIf="isVisible; else elsePart ">
+            <ng-template #elsePart>
+                <h1>Image Hidden</h1>
+            </ng-template>
+            
+        </div>
+        <div class="col-3">
+            <div class="d-flex flex-column">
+                <a (click)="notifyParent()" [class]="'text-' + 'reset'">
+                    <!-- hsl - hue, saturation and highlight -->
+                    <h1 [ngStyle]="{ color: 'hsl(' + hue + ', 100%, 50%)'}">{{ profile.name }}</h1>
+                    <div [innerHtml]="someHtmlText"></div>
+                </a>
+                <!-- <p [style.color]="'red'" [ngStyle]="{color: profile.type == 'Organization' ? 'red' : 'blue' }">Type: {{ profile.type }}</p> -->
+                <p [ngClass]="{
+                    'red': profile.type == 'Organization',
+                    'blue': profile.type == 'User',
+                    'orange': profile.type != 'Organization' && profile.type != 'User'
+                }">Type: {{ profile.type }}</p>
+                <p appHighlight *ngIf="profile.location">Location: {{ profile.location || '-' }}</p>
+                <!-- <p (mouseenter)="setColor($event)">Email: {{ profile.email || '-' }}</p> -->
+                <p appHighlight hoverColor="green" *ngIf="profile.email">Email: {{ profile.email || '-' }}</p>
+
+                <button class="btn" [ngClass]="isVisible ? 'btn-success' : 'btn-danger'"
+                (click)="toggleVisibility()">{{isVisible ? 'Hide' : 'Show'}} Picture</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <ul>
+    <li *ngFor="let award of awards">{{ award }}</li>
+</ul> -->
+
+<!-- <h3>Profile List</h3>
+<ul>
+    <li *ngFor="let profile of profiles" >
+        <div>
+            <p [ngClass]="{'red': profile.type == 'Organization', 'blue': profile.type == 'User'}">
+                Type : {{ profile.type }}
+            </p> 
+            <p *ngIf="profile.id < 20">{{profile.id}}</p>
+        </div>
+    </li>
+</ul> -->
+
