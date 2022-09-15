@@ -1,0 +1,4 @@
+/* all paragraphs in app component are blue : done using view encapsulation*/
+p{
+ color: blue;
+}
